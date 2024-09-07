@@ -31,19 +31,19 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3
         env:
-          working-directory: ./
+          working-directory: ./thesis
         with:
           texlive_version: 2024
           latexmk_shell_escape: true
           root_file: thesis.tex
-          working_directory: ./
+          working_directory: ./thesis
       - uses: actions/upload-artifact@v4
         name: Upload Article as artifact
         # https://github.com/actions/upload-artifact?tab=readme-ov-file#inputs
         with:
           name: Thesis
           # -${{ github.ref_type }}-${{github.ref_name}}
-          path: ./main/thesis.pdf
+          path: ./thesis/thesis.pdf
           if-no-files-found: error
       - name: Release
         uses: softprops/action-gh-release@v2
@@ -51,6 +51,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           files: |
-            ./thesis.pdf
+            ./thesis/thesis.pdf
           draft: false
           fail_on_unmatched_files: true
