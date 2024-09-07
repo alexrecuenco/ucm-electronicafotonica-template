@@ -10,9 +10,11 @@ on:
       - opened
     branches:
       - main
+      - multifile
   push:
     branches:
       - main
+      - multifile
     tags:
       - 'v*'
 jobs:
