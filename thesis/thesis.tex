@@ -1,0 +1,181 @@
+% !TeX root = thesis.tex
+% !TeX spellcheck = es_ES
+% !TeX encoding = UTF-8
+% SET PROGRAM LIKE THIS: TeX program = latexmk pdflatex -synctex=1 -pdf -interaction=nonstopmode -file-line-error %.tex
+% SET PROGRAM LIKE THIS: TeX TXS-program:pdflatex = pdflatex -synctex=1 -interaction=nonstopmode
+
+\documentclass[12pt, american, spanish]{../packages/masterfotonicaucm}
+
+\usepackage{graphicx}
+\graphicspath{{./images}{./tikzfigures}{./}{../images}{../tikzfigures}{../}}
+
+% TO CHANGE TO bibtex, although we recommend keeping biblatex
+% \RequirePackage{bibtex}
+% bibtex
+% \bibliographystyle{elsarticle-num}
+
+% https://www.overleaf.com/learn/latex/Biblatex_citation_styles
+% biblatex
+\usepackage[
+    backend=biber,
+    style=numeric,
+    sortlocale=en_US,
+    natbib=true,
+    % sort by order of appeareance
+    sorting=none,
+    % sort citation keys
+    sortcites,
+    url=true,
+    doi=true,
+    eprint=true
+]{biblatex}
+\addbibresource{../references.bib}
+\addbibresource{../mendeley.bib}
+
+\hypersetup{
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+    % Do hyperlinks have color or not:
+    % colorlinks=false,
+    colorlinks=true,
+}
+
+\title{%
+    Titulo de la tesis
+}
+\newcommand{\theenglishtitle}{English title of your thesis}
+
+\newcommand{\thetutor}{
+   Tu tutor %(50\%)
+}
+
+\newcommand{\thetutortwo}{
+    Segundo Tutor%(50\%)
+}
+\author{Nombre LastName LastName2}
+
+\usepackage{lipsum}
+
+\begin{document}
+\pagenumbering{gobble}
+
+% %%%%%%Portada%%%%%%%
+\begin{titlepage}
+    \begin{center}
+
+
+        \textbf{\Large{}UNIVERSIDAD COMPLUTENSE DE MADRID}
+        \vspace{0.5cm}
+
+        \textbf{\Large{}FACULTAD DE CIENCIAS FÍSICAS}
+        \vspace{1cm}
+
+        { \textbf{\large{}Máster en Nuevas Tecnologías Electrónicas y Fotónicas}} %
+        \vspace{0.8cm}
+
+        %%%%Logo Complutense%%%%%
+        % {\includesvg[height=6cm]{ucm-logo.svg}}
+        {\includegraphics[height=6cm]{ucm-logo.pdf}}
+        \vspace{0.8cm}
+
+        \textbf{\Large{}TRABAJO DE FIN DE MÁSTER} %
+        \vspace{2cm}
+
+        \textbf{\Large{}\thetitle}%
+
+        \textsc{ \theenglishtitle}%
+
+        \vspace{20mm}
+
+        {\bfseries \LARGE{}\theauthor}%
+        \vspace{10mm}
+
+        \textbf{\textsc{\Large{}\thetutor}}%
+        \vspace{5mm}
+
+        \textbf{\textsc{\Large{}\thetutortwo}}%
+        \vspace{15mm}
+
+        {\large{}Curso académico 2024}%
+        \vspace{5mm}
+    \end{center}
+\end{titlepage}%
+\cleardoublepage%
+
+
+\pagestyle{plain}
+
+\pagenumbering{roman}
+
+\section*{{\large{}Resumen: }}
+
+Esto es una prueba para probar el formato del Resumen.
+
+\section*{{\large{}Abstract: }}
+
+This is a test to prove the abstract's layout.
+
+\vfill
+
+\section*{{\large{}Palabras clave: }}
+
+Palabra 1, palabra2
+
+\section*{{\large{}Keywords: }}
+
+Palabra 1, palabra2
+
+\cleardoublepage%
+
+\section*{{\large{}Agradecimientos }}
+
+No es necesario pero se puede agradecer.
+
+\cleardoublepage%
+\tableofcontents%
+\cleardoublepage%
+
+
+\pagestyle{plain}
+
+\pagenumbering{arabic}
+
+\section{Introduction}
+
+Citamos con este comando~\cite{kour2014fast}.
+
+\lipsum[1-2]
+
+\subsection{Subsection}
+
+\lipsum[3-4]
+
+\section{Conclusions}
+
+Conclusion citando~\cite{hadash2018estimate,kour2014real}
+
+\lipsum[5-6]
+
+
+\addcontentsline{toc}{section}{\refname}
+% bibtex
+% \bibliography{references.bib}
+% biblatex
+\printbibliography[]
+
+
+\cleardoublepage%
+
+\appendix
+\pagenumbering{roman}
+
+\appendixpage%
+\addappheadtotoc%
+
+\section{Software usado}
+
+
+\section{Otro apendice}
+
+\end{document}
