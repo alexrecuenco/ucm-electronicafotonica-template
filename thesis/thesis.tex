@@ -5,6 +5,19 @@
 % SET PROGRAM LIKE THIS: TeX TXS-program:pdflatex = pdflatex -synctex=1 -interaction=nonstopmode
 
 \documentclass[12pt, american, spanish]{../packages/masterfotonicaucm}
+\usepackage{xr}
+\usepackage{subfiles}
+% This adds access to cref
+\usepackage{cleveref}
+
+% If we are in subfiles, to references other files, use the prefix M- and to get info on correct references add references to the subfiles.
+% While building the mainfile we can disable these steps
+\externaldocument[M-]{\subfix{thesis}}
+\newcommand{\mainref}[1]{\ifSubfilesClassLoaded{\ref{M-#1}}{\ref{#1}}}
+\newcommand{\maincref}[1]{\ifSubfilesClassLoaded{\cref{M-#1}}{\cref{#1}}}
+
+\AtEndDocument{\ifSubfilesClassLoaded{\printbibliography}{}}
+
 
 \usepackage{graphicx}
 \graphicspath{{./images}{./tikzfigures}{./}{../images}{../tikzfigures}{../}}
@@ -108,6 +121,7 @@
 
 \pagenumbering{roman}
 
+
 \section*{{\large{}Resumen: }}
 
 Esto es una prueba para probar el formato del Resumen.
@@ -122,17 +136,16 @@ This is a test to prove the abstract's layout.
 
 Palabra 1, palabra2
 
-\section*{{\large{}Keywords: }}
+\section*{{\large{}Keywords:}}
 
 Palabra 1, palabra2
 
 \cleardoublepage%
 
-\section*{{\large{}Agradecimientos }}
-
-No es necesario pero se puede agradecer.
+\subfile{../parts/00-agradecimientos.tex}
 
 \cleardoublepage%
+
 \tableofcontents%
 \cleardoublepage%
 
@@ -141,41 +154,28 @@ No es necesario pero se puede agradecer.
 
 \pagenumbering{arabic}
 
-\section{Introduction}
+\subfile{../parts/01-introduction.tex}
 
-Citamos con este comando~\cite{kour2014fast}.
+\subfile{../parts/04-other-section.tex}
+% Example of more files
+% \subfile{../parts/08-theory.tex}
+% \subfile{../parts/12-methods.tex}
+% \subfile{../parts/16-results.tex}
 
-\lipsum[1-2]
+\subfile{../parts/20-conclusion.tex}
 
-\subsection{Subsection}
-
-\lipsum[3-4]
-
-\section{Conclusions}
-
-Conclusion citando~\cite{hadash2018estimate,kour2014real}
-
-\lipsum[5-6]
-
-
+\cleardoublepage%
 \addcontentsline{toc}{section}{\refname}
 % bibtex
 % \bibliography{references.bib}
 % biblatex
 \printbibliography[]
 
+\clearpage
 
-\cleardoublepage%
+\pagenumbering{Roman}
 
-\appendix
-\pagenumbering{roman}
+\subfile{../parts/30-appendix.tex}
 
-\appendixpage%
-\addappheadtotoc%
-
-\section{Software usado}
-
-
-\section{Otro apendice}
 
 \end{document}

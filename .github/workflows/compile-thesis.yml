@@ -45,6 +45,23 @@ jobs:
           # -${{ github.ref_type }}-${{github.ref_name}}
           path: ./thesis/thesis.pdf
           if-no-files-found: error
+      - name: Compile Subfiles
+        uses: xu-cheng/latex-action@v3
+        env:
+          working-directory: ./parts
+        with:
+          texlive_version: 2024
+          latexmk_shell_escape: true
+          root_file: |
+            *.tex
+          working_directory: ./parts
+      - uses: actions/upload-artifact@v4
+        name: Upload Subfiles as artifact
+        # https://github.com/actions/upload-artifact?tab=readme-ov-file#inputs
+        with:
+          name: Subfiles
+          path: ./parts/*.pdf
+          if-no-files-found: error
       - name: Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
@@ -52,5 +69,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           files: |
             ./thesis/thesis.pdf
+            ./parts/*.pdf
           draft: false
           fail_on_unmatched_files: true

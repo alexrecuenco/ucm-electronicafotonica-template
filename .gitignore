@@ -851,3 +851,7 @@ env
 
 tmp.*
 *.tmp
+
+!parts/
+parts/*.xml
+

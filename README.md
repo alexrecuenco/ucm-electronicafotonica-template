@@ -16,4 +16,12 @@ To compile
 
 ```bash
 latexmk -pdf -synctex=1 -interaction=nonstopmode --shell-escape -file-line-error -halt-on-error -cd thesis/thesis.tex
+latexmk -pdf -synctex=1 -interaction=nonstopmode --shell-escape -file-line-error -halt-on-error -cd parts/*.tex
 ```
+
+## Multi-file
+
+Cada archivo se puede compilar individualmente
+
+- Cuando compilas un archivo por su cuenta no sabe las referencias en otros archivos excepto usando `mainref` and `maincref` (asumiendo que `thesis/thesis.aux` existe, es decir, que has compilado el archivo principal de antemano)
+- Cuando compilas una parte, genera una sección de referencias en ese archivo, pero esa no se comparte en general
